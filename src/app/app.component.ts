@@ -1,3 +1,4 @@
+import { Todo } from './todo';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,22 +9,22 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app works!';
   inputHint: string = "What needs to be done?"
-  todos: any[] = [];
-  todo: string;
-
+  // todos: any[] = [];
+  todos:Todo[] =[];
+   content:string;
   isChecked: boolean = false;
 
   AddItemToTodosArray($event: KeyboardEvent): void {
     if ($event.keyCode === 13) {
       if (($event.target as HTMLInputElement).value !== "") {
-        this.todo = ($event.target as HTMLInputElement).value;
-        this.todos.push(this.todo);
-        this.todo = '';
+        this.content = ($event.target as HTMLInputElement).value;
+        this.todos.push({content:this.content, isCompleted:false});
+        this.content = '';
       }
     }
   }
 
-  ChangeChecked(){
-    this.isChecked = !this.isChecked;
+  ChangeChecked(todo:Todo){
+    todo.isCompleted = ! todo.isCompleted;
   }
 }
