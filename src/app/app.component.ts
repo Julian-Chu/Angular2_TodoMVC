@@ -27,4 +27,8 @@ export class AppComponent {
   ChangeChecked(todo:Todo){
     todo.isCompleted = ! todo.isCompleted;
   }
+
+  ClearCompleted(){
+    this.todos = this.todos.filter( todo=> todo.isCompleted == false);
+  }
 }

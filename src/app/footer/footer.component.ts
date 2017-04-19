@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -9,9 +10,17 @@ export class FooterComponent implements OnInit {
 
   @Input()
   todos: any[] = [];
+
+  @Output()
+  clearCompleted = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ClearCompleted():void
+  {
+    this.clearCompleted.emit();
   }
 
 }
