@@ -14,7 +14,7 @@ export class AppComponent {
   content: string;
   isChecked: boolean = false;
 
-  sortBy:string;
+  sortBy: string;
   AddItemToTodosArray($event: KeyboardEvent): void {
     if ($event.keyCode === 13) {
       if (($event.target as HTMLInputElement).value !== "") {
@@ -35,13 +35,11 @@ export class AppComponent {
   }
 
   FilterTodos(sortBy: string): void {
-      this.sortBy = sortBy;
-
+    this.sortBy = sortBy;
   }
 
-  MarkedAllAsCompleted(){
-      this.todos.map( e=> e.isCompleted = true);
-
+  MarkedAllAsCompleted() {
+    this.todos.map(e => e.isCompleted = true);
   }
 
 }
