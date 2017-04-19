@@ -10,13 +10,20 @@ export class AppComponent {
   inputHint: string = "What needs to be done?"
   todos: any[] = [];
   todo: string;
-  
+
+  isChecked: boolean = false;
+
   AddItemToTodosArray($event: KeyboardEvent): void {
     if ($event.keyCode === 13) {
-      this.todo = ($event.target as HTMLInputElement).value;
-      this.todos.push(this.todo);
-      this.todo = '';
+      if (($event.target as HTMLInputElement).value !== "") {
+        this.todo = ($event.target as HTMLInputElement).value;
+        this.todos.push(this.todo);
+        this.todo = '';
+      }
     }
+  }
 
+  ChangeChecked(){
+    this.isChecked = !this.isChecked;
   }
 }
