@@ -7,6 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  InActive:boolean = false;
+  InCompleted:boolean = false;
+
 
   @Input()
   todos: any[] = [];
@@ -25,8 +28,15 @@ export class FooterComponent implements OnInit {
   }
 
   FilterTodos(sortBy: string): void {
+      this.InActive = false;
+      this.InCompleted = false;
+    switch(sortBy){
+      case 'Active': this.InActive = true;break;
+      case 'Completed': this.InCompleted = true;break;
+      default:
+      break;
+    }
     this.filterTodos.emit(sortBy);
-    console.log('filter in footercomponent');
   }
 
 }

@@ -36,7 +36,12 @@ export class AppComponent {
 
   FilterTodos(sortBy: string): void {
       this.sortBy = sortBy;
-      console.log('filter in appcomponent');
+
+  }
+
+  MarkedAllAsCompleted(){
+      this.todos.map( e=> e.isCompleted = true);
+
   }
 
 }
