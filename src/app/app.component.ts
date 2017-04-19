@@ -19,7 +19,8 @@ export class AppComponent {
     if ($event.keyCode === 13) {
       if (($event.target as HTMLInputElement).value !== "") {
         this.content = ($event.target as HTMLInputElement).value;
-        this.todos.push({ content: this.content, isCompleted: false });
+        // this.todos.push({ content: this.content, isCompleted: false });
+        this.todos = [...this.todos, { content: this.content, isCompleted: false }];
         this.content = '';
       }
     }
