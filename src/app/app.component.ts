@@ -42,4 +42,8 @@ export class AppComponent {
     this.todos.map(e => e.isCompleted = true);
   }
 
+  deleteTodoItem(item:Todo){
+    this.todos = this.todos.filter(e=> e!=item);
+  }
+
 }
