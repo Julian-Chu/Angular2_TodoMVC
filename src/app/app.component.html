@@ -3,6 +3,8 @@
 				<app-title></app-title>
 				<input class="new-todo"
         [placeholder] = inputHint
+        (keyup)="AddItemToTodosArray($event)"
+        [(ngModel)]="todo"
         autofocus>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
