@@ -14,13 +14,19 @@ export class FooterComponent implements OnInit {
   @Output()
   clearCompleted = new EventEmitter();
   constructor() { }
+  @Output()
+  filterTodos = new EventEmitter<string>();
 
   ngOnInit() {
   }
 
-  ClearCompleted():void
-  {
+  ClearCompleted(): void {
     this.clearCompleted.emit();
+  }
+
+  FilterTodos(sortBy: string): void {
+    this.filterTodos.emit(sortBy);
+    console.log('filter in footercomponent');
   }
 
 }
