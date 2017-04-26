@@ -27,40 +27,42 @@ export class AppComponent implements OnInit {
 
   requestOptions: RequestOptions = new RequestOptions({
     headers: new Headers(
-      { 'Authorization': 'token 5b4e3144-0e67-4865-9f02-35821b2f4677', 'Content-Type':'application/json' })
+      { 'Authorization': 'token 5b4e3144-0e67-4865-9f02-35821b2f4677', 'Content-Type': 'application/json' })
   });
   constructor(private todosvc: TodosService, private _http: Http) {
     // this.todos$ = todosvc.getTodos();
     this.todosvc.getTodos().subscribe(rsp => {
       this.todos = rsp.json();
-      console.log(rsp.json())
+      this.todosvc.todos = this.todos;
     })
   }
 
-  updateTodos() {
-    this._http.post('./me/TodoMVC', this.todos, this.requestOptions)
-      .subscribe(rsp => console.log('更新完成！ ', rsp.json()));
+  // updateTodos() {
+  //   this._http.post('./me/TodoMVC', this.todos, this.requestOptions)
+  //     .subscribe(rsp => console.log('更新完成！ ', rsp.json()));
 
-  }
+  // }
   AddItemToTodosArray($event: KeyboardEvent): void {
     if ($event.keyCode === 13) {
       if (($event.target as HTMLInputElement).value !== "") {
         this.content = ($event.target as HTMLInputElement).value;
-        // this.todos.push({ content: this.content, isCompleted: false });
         this.todos = [...this.todos, { content: this.content, isCompleted: false }];
+        this.todosvc.todos = this.todos;
         this.content = '';
-        this.updateTodos();
+
       }
     }
   }
 
-  ChangeChecked(todo: Todo) {
+  ChangeCompleted(todo: Todo) {
     todo.isCompleted = !todo.isCompleted;
+    this.todos = [...this.todos];
+    this.todosvc.todos = this.todos;
   }
 
   ClearCompleted() {
     this.todos = this.todos.filter(todo => todo.isCompleted == false);
-    this.updateTodos();
+    this.todosvc.todos = this.todos;
   }
 
   FilterTodos(sortBy: string): void {
@@ -69,13 +71,11 @@ export class AppComponent implements OnInit {
 
   MarkedAllAsCompleted() {
     this.todos.map(e => e.isCompleted = true);
+    this.todosvc.todos = this.todos;
   }
 
   deleteTodoItem(item: Todo) {
     this.todos = this.todos.filter(e => e != item);
-    this.updateTodos();
+    this.todosvc.todos = this.todos;
   }
-
-
-
 }
