@@ -36,21 +36,11 @@ export class AppComponent implements OnInit {
       this.todosvc.todos = this.todos;
     })
   }
-
-  // updateTodos() {
-  //   this._http.post('./me/TodoMVC', this.todos, this.requestOptions)
-  //     .subscribe(rsp => console.log('更新完成！ ', rsp.json()));
-
-  // }
-  AddItemToTodosArray($event: KeyboardEvent): void {
-    if ($event.keyCode === 13) {
-      if (($event.target as HTMLInputElement).value !== "") {
-        this.content = ($event.target as HTMLInputElement).value;
-        this.todos = [...this.todos, { content: this.content, isCompleted: false }];
-        this.todosvc.todos = this.todos;
-        this.content = '';
-
-      }
+  AddTodo($event: HTMLInputElement): void {
+    if ($event.value) {
+      this.todos = [...this.todos, { content: this.content, isCompleted: false }];
+      this.todosvc.todos = this.todos;
+      this.content = '';
     }
   }
 
@@ -59,21 +49,17 @@ export class AppComponent implements OnInit {
     this.todos = [...this.todos];
     this.todosvc.todos = this.todos;
   }
-
   ClearCompleted() {
     this.todos = this.todos.filter(todo => todo.isCompleted == false);
     this.todosvc.todos = this.todos;
   }
-
   FilterTodos(sortBy: string): void {
     this.sortBy = sortBy;
   }
-
   MarkedAllAsCompleted() {
     this.todos.map(e => e.isCompleted = true);
     this.todosvc.todos = this.todos;
   }
-
   deleteTodoItem(item: Todo) {
     this.todos = this.todos.filter(e => e != item);
     this.todosvc.todos = this.todos;
