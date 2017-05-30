@@ -1,9 +1,9 @@
 {
-  "/me": {
+  "/api": {
     "target": {
-      "host": "jsonbin.org",
-      "protocol": "https:",
-      "port": 443
+      "host": "localhost",
+      "protocol": "http:",
+      "port": 2000
     },
     "secure": false,
     "changeOrigin": true,

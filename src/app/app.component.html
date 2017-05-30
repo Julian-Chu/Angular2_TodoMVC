@@ -1,7 +1,7 @@
 <section class="todoapp">
   <header class="header">
     <app-title></app-title>
-    <input class="new-todo" [placeholder]=inputHint (keyup.enter)="AddTodo($event.target)" [(ngModel)]="content" autofocus>
+    <input class="new-todo" [placeholder]=inputHint (keyup.enter)="AddTodo($event.target)" [(ngModel)]="Description" autofocus>
   </header>
   <!-- This section should be hidden by default and shown when there are todos -->
   <section class="main" *ngIf="todos.length!==0">
@@ -10,10 +10,10 @@
     <ul class="todo-list">
       <!-- These are here just to show the structure of the list items -->
       <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li *ngFor="let item of (todos  | filterPipe:sortBy)" [ngClass]="{'completed': item.isCompleted}">
+      <li *ngFor="let item of (todos  | filterPipe:sortBy)" [ngClass]="{'completed': item.Completed}">
         <div class="view">
-          <input class="toggle" type="checkbox" [checked]=item.isCompleted (click)="ChangeCompleted(item)">
-          <label>{{item.content | uppercase}}</label>
+          <input class="toggle" type="checkbox" [checked]=item.Completed (click)="ChangeCompleted(item)">
+          <label>{{item.Description | uppercase}}</label>
           <button class="destroy" (click)="deleteTodoItem(item)"></button>
         </div>
         <input class="edit" value="Create a TodoMVC template">

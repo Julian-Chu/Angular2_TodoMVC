@@ -7,18 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  InActive:boolean = false;
-  InCompleted:boolean = false;
-
-
-  @Input()
-  todos: any[] = [];
-
-  @Output()
-  clearCompleted = new EventEmitter();
+  InActive = false;
+  InCompleted = false;
+  @Input() todos: any[] = [];
+  @Output() clearCompleted = new EventEmitter();
+  @Output() filterTodos = new EventEmitter<string>();
   constructor() { }
-  @Output()
-  filterTodos = new EventEmitter<string>();
 
   ngOnInit() {
   }
@@ -28,13 +22,15 @@ export class FooterComponent implements OnInit {
   }
 
   FilterTodos(sortBy: string): void {
-      this.InActive = false;
-      this.InCompleted = false;
-    switch(sortBy){
-      case 'Active': this.InActive = true;break;
-      case 'Completed': this.InCompleted = true;break;
+    this.InActive = false;
+    this.InCompleted = false;
+    switch (sortBy) {
+      case 'Active': this.InActive = true;
+        break;
+      case 'Completed': this.InCompleted = true;
+        break;
       default:
-      break;
+        break;
     }
     this.filterTodos.emit(sortBy);
   }

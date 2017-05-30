@@ -1,5 +1,6 @@
 export class Todo
 {
-  content:string;
-  isCompleted:boolean;
+  Id: number;
+  Description: string;
+  Completed: boolean;
 }

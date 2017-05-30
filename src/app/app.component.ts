@@ -2,7 +2,7 @@ import { RequestOptions, Response, Http, Headers } from '@angular/http';
 import { TodosService } from './todos.service';
 import { Todo } from './todo';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +10,13 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  ngOnInit(): void {
-  }
-
-
   title = 'app works!';
-  inputHint: string = "What needs to be done?"
+  inputHint = 'What needs to be done?'
   // todos: any[] = [];
   todos: any[] = [];
   // todos: Observable<Todo[]>;
-  content: string;
-  isChecked: boolean = false;
+  Description: string;
+  isChecked = false;
 
   sortBy: string;
 
@@ -34,23 +30,24 @@ export class AppComponent implements OnInit {
     this.todosvc.getTodos().subscribe(rsp => {
       this.todos = rsp.json();
       this.todosvc.todos = this.todos;
-    })
+    });
   }
+  ngOnInit(): void {  }
   AddTodo($event: HTMLInputElement): void {
     if ($event.value) {
-      this.todos = [...this.todos, { content: this.content, isCompleted: false }];
+      this.todos = [...this.todos, { Description: this.Description, Completed: false }];
       this.todosvc.todos = this.todos;
-      this.content = '';
+      this.Description = '';
     }
   }
 
   ChangeCompleted(todo: Todo) {
-    todo.isCompleted = !todo.isCompleted;
+    todo.Completed = !todo.Completed;
     this.todos = [...this.todos];
     this.todosvc.todos = this.todos;
   }
   ClearCompleted() {
-    this.todos = this.todos.filter(todo => todo.isCompleted == false);
+    this.todos = this.todos.filter(todo => todo.Completed === false);
     this.todosvc.todos = this.todos;
   }
   FilterTodos(sortBy: string): void {
@@ -61,7 +58,7 @@ export class AppComponent implements OnInit {
     this.todosvc.todos = this.todos;
   }
   deleteTodoItem(item: Todo) {
-    this.todos = this.todos.filter(e => e != item);
+    this.todos = this.todos.filter(e => e !== item);
     this.todosvc.todos = this.todos;
   }
 }
